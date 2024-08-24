@@ -1,17 +1,16 @@
 ﻿namespace Proficiencies
 {
     using System.Collections.Generic;
-    using UnityEngine;
     using BepInEx;
     using HarmonyLib;
-    using System;
     using System.Linq;
+    using System.Reflection;
 
     [BepInPlugin(GUID, NAME, VERSION)]
     public class Proficiencies : BaseUnityPlugin
     {
         public const string GUID = "com.ehaugw.proficiencies";
-        public const string VERSION = "1.0.0";
+        public const string VERSION = "1.0.1";
         public const string NAME = "Proficiencies";
 
         public static List<IWeaponProficiencyOnCharacter> IWeaponProficiencyOnCharacterSources = new List<IWeaponProficiencyOnCharacter>();
@@ -38,6 +37,29 @@
                 }
             }
         }
+
+        //[HarmonyPatch(typeof(ItemDetailsDisplay), "ShowDetails")]
+        ////[HarmonyAfter(new string[] {"com.sinai.sideloader"})]
+        //public class ItemDetailsDisplay_ShowDetails
+        //{
+        //    [HarmonyPostfix]
+        //    public static void Postfix(ItemDetailsDisplay __instance, ref int detailCount, Equipment ___cachedEquipment)
+        //    {
+        //        if (___cachedEquipment != null)
+        //        {
+        //            var weaponProficiency = ___cachedEquipment.GetWeaponProficiency();
+                    
+        //            if (weaponProficiency > 0)
+        //            {
+        //                MethodInfo privMethod = __instance.GetType().GetMethod("GetRow", BindingFlags.NonPublic | BindingFlags.Instance);
+        //                ItemDetailRowDisplay row = privMethod.Invoke(__instance, new object[] { detailCount }) as ItemDetailRowDisplay;
+                        
+        //                //__instance.GetRow(detailCount).SetInfo(LocalizationManager.Instance.GetLoc("ItemStat_DamageModifier"), this.damageList, false, true);
+        //                row.SetInfo("Weapon Proficiency", weaponProficiency);
+        //            }
+        //        }
+        //    }
+        //}
     }
     public static class ProficiencyExtensions
     {
